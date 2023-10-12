@@ -1,16 +1,14 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
-/**
- * Write a description of class PKW here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
- */
-public class PKW extends Fahrzeuge
-{
+public class PKW extends Fahrzeuge {   
     
-    public void act()
-    {
+    public PKW(String imgPath) {
+        //super.setSpeed(speed);
+        super.setSprite(imgPath);
+        System.out.println(super.getSpeed());
+        setImage(super.getSprite());
+    }
+    public void act() {
         // Add your action code here.
     }
 }

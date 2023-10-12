@@ -1,7 +1,7 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 public class Parkplatz extends Strukturen {
-    //varibales
+    
     public int PARKPLATZ_WIDTH;
     public int PARKPLATZ_HEIGHT;
     public GreenfootImage parkplatz;
@@ -14,28 +14,25 @@ public class Parkplatz extends Strukturen {
         PARKPLATZ_HEIGHT = height;
         parkplatz = new GreenfootImage(PARKPLATZ_WIDTH, PARKPLATZ_HEIGHT);
         drawParkplatzImage();
-        setPosition(x, y);
+        setX(x);
+        setY(y);
     }
+    //get/set position
+    public void setX(int x) { x_pos = x; }
+    public void setY(int y) { y_pos = y; }
+    public int getX() { return x_pos; }
+    public int getY() { return y_pos; }
     //method for drawing the image of the parkplatz
     public void drawParkplatzImage() {
         parkplatz.setColor(new Color(140, 140, 140));
         parkplatz.fill();
         setImage(parkplatz);
     }
-    //get/set position
-    public void setPosition(int x, int y) {
-        x_pos = x;
-        y_pos = y;
-    }
-    public int[] getPosition() {
-        int[] position = {x_pos, y_pos};
-        return position;
-    }
     //method for setting the size of the parkplatz
     public int[] getParkplatzDimensions() {
         return getDimensions(parkplatz);
     }
-    //method for getting the top left corner
+    //method for getting the top left corner as array
     public int[] getTopLeft() {
         int[] topLeft = {
             x_pos - PARKPLATZ_WIDTH / 2,

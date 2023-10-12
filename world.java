@@ -2,15 +2,16 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 public class world extends World {
     
-    public Parkplatz parkplatz;
-    public int parkplatzWidth;
-    public int parkplatzHeight;
+    private Parkplatz parkplatz;
+    private int parkbuchtWidth = 100;
+    private int parkbuchtHeight = 45;
+    private int AMOUNT_OF_PARKBUCHTEN = 20;
+    private int AMOUNT_OF_PARKBUCHTEN_PER_SIDE = 10;
+    private int parkplatzWidth;
+    private int parkplatzHeight;
     
-    public int parkbuchtWidth = 100;
-    public int parkbuchtHeight = 45;
-    
-    public int AMOUNT_OF_PARKBUCHTEN = 20;
-    public int AMOUNT_OF_PARKBUCHTEN_PER_SIDE = 10;
+    private PKW[] cars = new PKW[20];
+    private Moped[] mopeds = new Moped[5];
     
     public world() {
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
@@ -44,7 +45,7 @@ public class world extends World {
         if (!isFliped) {
             parkbucht.setX(topLeft_x + parkbuchtDimensions[0] / 2);
         } else {
-            parkbucht.setX(topLeft_x + parkplatzWidth - parkbuchtDimensions[0] + 50);
+            parkbucht.setX(topLeft_x + parkplatz.getParkplatzDimensions()[0] - parkbuchtDimensions[0] + 50);
         }
         //sets the y position from top left parkplatz plus offset
         parkbucht.setY(topLeft_y + parkbuchtDimensions[1] / 2 + offset_y);
@@ -65,12 +66,22 @@ public class world extends World {
         );
         int[] parkplatz_dimensions = parkplatz.getParkplatzDimensions();
         // adds new object in the world center
-        addObject(parkplatz, parkplatz.getPosition()[0], parkplatz.getPosition()[1]);
+        addObject(parkplatz, parkplatz.getX(), parkplatz.getY());
         
         //adds as many parkbuchten as needed
         for (int i = 1; i <= AMOUNT_OF_PARKBUCHTEN; i++) {
             if (i <= AMOUNT_OF_PARKBUCHTEN_PER_SIDE) { addParkbucht(i, false); }
             if (i > AMOUNT_OF_PARKBUCHTEN_PER_SIDE) { addParkbucht(i, true); }
         }
+        //car files
+        String blackCar = "black-car.png";
+        String greenCar = "green-car.png";
+        String blueCar = "blue-car.png";
+        String whiteCar = "white-car.png";
+        String redCar = "red-car.png";
+        addObject(new PKW(blueCar), 100, 100);
+        addObject(new Moped(5), 20, 20);
+        
+        
     }
 }
