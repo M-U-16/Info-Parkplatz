@@ -16,16 +16,22 @@ public class Fahrzeuge extends Actor {
     //get/set image
     public void setSprite(String imgPath) { image = new GreenfootImage(imgPath); }
     public GreenfootImage getSprite() { return image; }
+    
     //get/set marke
     public void setMarke(String name) { marke = name; }
     public String getMarke() { return marke; };
+    
     //get/set color
     public void setColor(String Color) { color = Color; }
     public String getColor() { return color; }
+    
     //set startDirection
     public void setStartDirection(String direction) { startDirection = direction; }
+    
     //set/get direction
     public void setDirection(int rotation) { direction = rotation; }
+    public int getDirection() { return direction; }
+    
     //set/get speed
     public void setSpeed(int number) { speed = number; }
     public int getSpeed() { return speed; }

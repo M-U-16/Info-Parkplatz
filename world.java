@@ -79,9 +79,15 @@ public class world extends World {
         String blueCar = "blue-car.png";
         String whiteCar = "white-car.png";
         String redCar = "red-car.png";
+        
         addObject(new PKW(blueCar), 100, 100);
-        addObject(new Moped(5), 20, 20);
+        //addObject(new Moped(5), 20, 20);
         
-        
+        //System.out.print(getObjects(Parkbucht.class));
+        for (Parkbucht i : getObjects(Parkbucht.class)) {
+            //System.out.print(i.getX());
+            //System.out.println(i.getY());
+            System.out.println(i.getSlotNumber());
+        }
     }
 }
