@@ -73,21 +73,43 @@ public class world extends World {
             if (i <= AMOUNT_OF_PARKBUCHTEN_PER_SIDE) { addParkbucht(i, false); }
             if (i > AMOUNT_OF_PARKBUCHTEN_PER_SIDE) { addParkbucht(i, true); }
         }
-        //car files
+        //adding cars and mopeds
+        //car image files
         String blackCar = "black-car.png";
         String greenCar = "green-car.png";
         String blueCar = "blue-car.png";
         String whiteCar = "white-car.png";
         String redCar = "red-car.png";
         
-        addObject(new PKW(blueCar), 100, 100);
+        //addObject(new PKW(blueCar, 0), 100, 100);
         //addObject(new Moped(5), 20, 20);
+        
+        PKW[] cars = new PKW[19];
+        cars[0] = new PKW(blackCar, 1);
+        cars[1] = new PKW(greenCar, 2);
+        cars[2] = new PKW(blackCar, 3);
+        cars[3] = new PKW(blackCar, 4);
+        cars[4] = new PKW(blackCar, 5);
+        cars[5] = new PKW(blackCar, 6);
+        cars[6] = new PKW(blackCar, 7);
+        cars[7] = new PKW(blackCar, 8);
+        cars[8] = new PKW(blackCar, 9);
+        cars[9] = new PKW(blueCar, 10);
         
         //System.out.print(getObjects(Parkbucht.class));
         for (Parkbucht i : getObjects(Parkbucht.class)) {
             //System.out.print(i.getX());
             //System.out.println(i.getY());
-            System.out.println(i.getSlotNumber());
+            //System.out.println(i.getSlotNumber());
+            for (PKW car : cars) {
+                if (car == null) {}
+                else if (car.getSlotPosition() == i.getSlotNumber() ) {
+                    car.setX(i.getX());
+                    car.setY(i.getY());
+                    System.out.println(car.getX() + " " + car.getY());
+                    addObject(car, car.getX(), car.getY());
+                }
+            }
         }
     }
 }
