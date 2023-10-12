@@ -10,8 +10,8 @@ public class world extends World {
     private int parkplatzWidth;
     private int parkplatzHeight;
     
-    private PKW[] cars = new PKW[20];
-    private Moped[] mopeds = new Moped[5];
+    //private PKW[] cars = new PKW[20];
+    //private Moped[] mopeds = new Moped[5];
     
     public world() {
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
