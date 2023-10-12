@@ -92,9 +92,17 @@ public class world extends World {
         cars[4] = new PKW(blackCar, 5);
         cars[5] = new PKW(blackCar, 6);
         cars[6] = new PKW(blackCar, 7);
-        cars[7] = new PKW(blackCar, 8);
+        cars[7] = new PKW(whiteCar, 8);
         cars[8] = new PKW(blackCar, 9);
         cars[9] = new PKW(blueCar, 10);
+        cars[10] = new PKW(blueCar, 11);
+        cars[11] = new PKW(blueCar, 12);
+        cars[12] = new PKW(blueCar, 13);
+        cars[13] = new PKW(blueCar, 14);
+        cars[14] = new PKW(blueCar, 15);
+        cars[15] = new PKW(blueCar, 16);
+        cars[16] = new PKW(blueCar, 17);
+        
         
         //System.out.print(getObjects(Parkbucht.class));
         for (Parkbucht i : getObjects(Parkbucht.class)) {
