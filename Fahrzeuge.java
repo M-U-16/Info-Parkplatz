@@ -1,4 +1,5 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+import java.util.Random;
 
 public class Fahrzeuge extends Actor {
     
@@ -6,6 +7,7 @@ public class Fahrzeuge extends Actor {
     public String color;
     public String startDirection;
     public int slotPosition;
+    public Random random = new Random();
     
     public GreenfootImage image;
     
@@ -15,7 +17,11 @@ public class Fahrzeuge extends Actor {
     public int x_pos;
     public int y_pos;
     
-    public Fahrzeuge() { 
+    public int width;
+    public int height;
+    
+    public Fahrzeuge() {
+        setSpeed(generateRandomSpeed());
     }
     //get/set image
     public void setSprite(String imgPath) { image = new GreenfootImage(imgPath); }
@@ -50,11 +56,23 @@ public class Fahrzeuge extends Actor {
     public int getX() { return x_pos; }
     public int getY() { return y_pos; }
     
-    public void movement() {
-        move(5);
+    //set width and height
+    public void setWidth() { width = image.getWidth(); }
+    public void setHeight() { height = image.getHeight(); }
+    
+    public void update() { setRotation(direction); }
+    public int generateRandomSpeed() { return random.nextInt(2, 6); }
+    
+    public boolean checkEdge() {
+        //check left edge
+        if (x_pos + width / 2 <= 0) { return true; }
+        return true;
     }
     
-    public void act() {
-        // Add your action code here.
+    public void movement() {
+        int distance = speed;
+        move(distance);
     }
+    
+    public void act() {}
 }
