@@ -50,6 +50,10 @@ public class Fahrzeuge extends Actor {
     public int getX() { return x_pos; }
     public int getY() { return y_pos; }
     
+    public void movement() {
+        move(5);
+    }
+    
     public void act() {
         // Add your action code here.
     }

@@ -3,10 +3,11 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public class world extends World {
     
     private Parkplatz parkplatz;
-    private int parkbuchtWidth = 100;
-    private int parkbuchtHeight = 45;
-    private int AMOUNT_OF_PARKBUCHTEN = 20;
-    private int AMOUNT_OF_PARKBUCHTEN_PER_SIDE = 10;
+    private int parkbuchtWidth = 63;
+    private int parkbuchtHeight = 28;
+    private int AMOUNT_OF_PARKBUCHTEN = 28;
+    private int parkplatzMiddle = 60;
+    private int AMOUNT_OF_PARKBUCHTEN_PER_SIDE = 14;
     private int parkplatzWidth;
     private int parkplatzHeight;
     
@@ -38,14 +39,19 @@ public class world extends World {
         if (slotNumber <= AMOUNT_OF_PARKBUCHTEN_PER_SIDE) {
             offset_y = parkbuchtDimensions[1] * (slotNumber - 1);
         } else {
-            offset_y = parkbuchtDimensions[1] * (slotNumber - 11);
+            offset_y = parkbuchtDimensions[1] * (slotNumber - 15);
         }
         
         //sets the x position according to the rotation state
         if (!isFliped) {
             parkbucht.setX(topLeft_x + parkbuchtDimensions[0] / 2);
         } else {
-            parkbucht.setX(topLeft_x + parkplatz.getParkplatzDimensions()[0] - parkbuchtDimensions[0] + 50);
+            parkbucht.setX(
+                topLeft_x +
+                parkplatz.getParkplatzDimensions()[0] -
+                parkbuchtDimensions[0] +
+                parkplatzMiddle
+            );
         }
         //sets the y position from top left parkplatz plus offset
         parkbucht.setY(topLeft_y + parkbuchtDimensions[1] / 2 + offset_y);
@@ -56,11 +62,11 @@ public class world extends World {
     }
     public void populate() {
         // Create Parkplatz
-        parkplatzWidth = parkbuchtWidth * 2 + 50;
+        parkplatzWidth = parkbuchtWidth * 2 + parkplatzMiddle;
         parkplatzHeight = parkbuchtHeight * AMOUNT_OF_PARKBUCHTEN_PER_SIDE;
         parkplatz = new Parkplatz(
-            getWidth() - parkplatzWidth / 2, //places the parkplatz on right side
-            getHeight() / 2, //centers the parkplatz vertical
+            getWidth() / 2, //places the parkplatz on right side
+            parkplatzHeight / 2 + 20, //centers the parkplatz vertical
             parkplatzWidth, //sets the width of the parkplatz
             parkplatzHeight //sets the height of the parkplatz
         );
@@ -75,46 +81,46 @@ public class world extends World {
         }
         //adding cars and mopeds
         //car image files
-        String blackCar = "black-car.png";
-        String greenCar = "green-car.png";
-        String blueCar = "blue-car.png";
-        String whiteCar = "white-car.png";
-        String redCar = "red-car.png";
-        
-        //addObject(new PKW(blueCar, 0), 100, 100);
-        //addObject(new Moped(5), 20, 20);
+        String blackCar = "cars/black-car.png";
+        String greenCar = "cars/green-car.png";
+        String blueCar = "cars/blue-car.png";
+        String whiteCar = "cars/white-car.png";
+        String redCar = "cars/red-car.png";
+        //car image files
+        String longGreyMoped = "mopeds/moped-grau-lang.png";
+        String yellowMoped = "mopeds/moped-yellow.png";
+        String türkisMoped = "mopeds/moped-türkis.png";
+        String blueMoped = "mopeds/moped-blue.png";
+       
+        int left = 180;
+        int right = 0;
         
         PKW[] cars = new PKW[19];
-        cars[0] = new PKW(blackCar, 1);
-        cars[1] = new PKW(greenCar, 2);
-        cars[2] = new PKW(blackCar, 3);
-        cars[3] = new PKW(blackCar, 4);
-        cars[4] = new PKW(blackCar, 5);
-        cars[5] = new PKW(blackCar, 6);
-        cars[6] = new PKW(blackCar, 7);
-        cars[7] = new PKW(whiteCar, 8);
-        cars[8] = new PKW(blackCar, 9);
-        cars[9] = new PKW(blueCar, 10);
-        cars[10] = new PKW(blueCar, 11);
-        cars[11] = new PKW(blueCar, 12);
-        cars[12] = new PKW(blueCar, 13);
-        cars[13] = new PKW(blueCar, 14);
-        cars[14] = new PKW(blueCar, 15);
-        cars[15] = new PKW(blueCar, 16);
-        cars[16] = new PKW(blueCar, 17);
-        
-        
-        //System.out.print(getObjects(Parkbucht.class));
+        cars[0] = new PKW(blackCar, 1, left);
+        cars[1] = new PKW(greenCar, 2, right);
+        cars[2] = new PKW(blackCar, 3, left);
+        cars[3] = new PKW(blackCar, 4, left);
+        cars[4] = new PKW(blackCar, 5, left);
+        cars[5] = new PKW(blackCar, 6, left);
+        cars[6] = new PKW(redCar, 7, left);
+        cars[7] = new PKW(whiteCar, 8, left);
+        cars[8] = new PKW(blackCar, 9, left);
+        cars[9] = new PKW(blueCar, 10, left);
+        cars[10] = new PKW(blueCar, 11, left);
+        cars[11] = new PKW(blueCar, 12, left);
+        cars[12] = new PKW(blueCar, 13, left);
+        cars[13] = new PKW(blueCar, 14, left);
+        cars[14] = new PKW(blueCar, 15, left);
+        cars[15] = new PKW(blueCar, 16, left);
+        cars[16] = new PKW(blueCar, 17, left);
+         
         for (Parkbucht i : getObjects(Parkbucht.class)) {
-            //System.out.print(i.getX());
-            //System.out.println(i.getY());
-            //System.out.println(i.getSlotNumber());
             for (PKW car : cars) {
                 if (car == null) {}
                 else if (car.getSlotPosition() == i.getSlotNumber() ) {
                     car.setX(i.getX());
                     car.setY(i.getY());
-                    System.out.println(car.getX() + " " + car.getY());
+                    //System.out.println(car.getX() + " " + car.getY());
                     addObject(car, car.getX(), car.getY());
                 }
             }
