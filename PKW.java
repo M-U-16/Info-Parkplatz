@@ -18,7 +18,6 @@ public class PKW extends Fahrzeuge {
         
         movement();
         if (isAtEdge()) {
-            System.out.print(direction);
             if (direction == 180) { setDirection(0); }
             else if (direction == 0) { setDirection(180); }
             update();
