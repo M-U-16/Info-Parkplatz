@@ -11,57 +11,51 @@ public class world extends World {
     private int parkplatzWidth;
     private int parkplatzHeight;
     
-    //private PKW[] cars = new PKW[20];
-    //private Moped[] mopeds = new Moped[5];
-    
     public world() {
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
         super(600, 600, 1);
-        //setBackground("background.png");
         populate();
     }
+    //---------------method for adding parkbuchten----------------------------------
     public void addParkbucht(int slotNumber, boolean isFliped) {
-        int topLeft_x;
-        int topLeft_y;
-        int offset_y;
-        
-        topLeft_x = parkplatz.getTopLeft()[0];
-        topLeft_y = parkplatz.getTopLeft()[1];
-        offset_y = 0;
+         
+        int topLeft_x = parkplatz.getLeft();
+        int topLeft_y = parkplatz.getTop();
+        int offset_y = 0;
         
         //creating a new instance of parkbucht
         Parkbucht parkbucht = new Parkbucht(slotNumber, isFliped);
         //setting width and height of parkbucht instance
-        parkbucht.setParkbuchtDimensions(parkbuchtWidth, parkbuchtHeight);
-        //getting the dimensions for later placing
-        int[] parkbuchtDimensions = parkbucht.getParkbuchtDimensions();
+        parkbucht.scaleImage(parkbuchtWidth, parkbuchtHeight);
+        //getting the dimensions for placing them later
+        int parkbucht_width = parkbucht.getImageWidth();
+        int parkbucht_height = parkbucht.getImageHeight();
         
         if (slotNumber <= AMOUNT_OF_PARKBUCHTEN_PER_SIDE) {
-            offset_y = parkbuchtDimensions[1] * (slotNumber - 1);
+            offset_y = parkbucht_height * (slotNumber - 1);
         } else {
-            offset_y = parkbuchtDimensions[1] * (slotNumber - 15);
+            offset_y = parkbucht_height * (slotNumber - 15);
         }
         
         //sets the x position according to the rotation state
         if (!isFliped) {
-            parkbucht.setX(topLeft_x + parkbuchtDimensions[0] / 2);
+            parkbucht.setX(topLeft_x + parkbucht_width / 2);
         } else {
             parkbucht.setX(
                 topLeft_x +
-                parkplatz.getParkplatzDimensions()[0] -
-                parkbuchtDimensions[0] +
+                parkplatz.getImageWidth() -
+                parkbucht_width +
                 parkplatzMiddle
             );
         }
         //sets the y position from top left parkplatz plus offset
-        parkbucht.setY(topLeft_y + parkbuchtDimensions[1] / 2 + offset_y);
-        
+        parkbucht.setY(topLeft_y + parkbucht.getImageHeight() / 2 + offset_y);
         //add the new parkbucht to the world
-        addObject(parkbucht, parkbucht.getX(), parkbucht.getY());
-        
+        addObject(parkbucht, parkbucht.getCurrentX(), parkbucht.getCurrentY());    
     }
+    //---------------populate the world----------------------------------
     public void populate() {
-        // Create Parkplatz
+        //---------------creating parkplatz----------------------------------
         parkplatzWidth = parkbuchtWidth * 2 + parkplatzMiddle;
         parkplatzHeight = parkbuchtHeight * AMOUNT_OF_PARKBUCHTEN_PER_SIDE;
         parkplatz = new Parkplatz(
@@ -70,23 +64,23 @@ public class world extends World {
             parkplatzWidth, //sets the width of the parkplatz
             parkplatzHeight //sets the height of the parkplatz
         );
-        int[] parkplatz_dimensions = parkplatz.getParkplatzDimensions();
-        // adds new object in the world center
-        addObject(parkplatz, parkplatz.getX(), parkplatz.getY());
         
-        //adds as many parkbuchten as needed
+        // adds new object in the world center
+        addObject(parkplatz, parkplatz.getCurrentX(), parkplatz.getCurrentY());
+        
+        //---------------adding parkbuchten----------------------------------
         for (int i = 1; i <= AMOUNT_OF_PARKBUCHTEN; i++) {
             if (i <= AMOUNT_OF_PARKBUCHTEN_PER_SIDE) { addParkbucht(i, false); }
             if (i > AMOUNT_OF_PARKBUCHTEN_PER_SIDE) { addParkbucht(i, true); }
         }
-        //adding cars and mopeds
+        //---------------adding cars and mopeds----------------------------------
         //car image files
         String blackCar = "cars/black-car.png";
         String greenCar = "cars/green-car.png";
         String blueCar = "cars/blue-car.png";
         String whiteCar = "cars/white-car.png";
         String redCar = "cars/red-car.png";
-        //car image files
+        //moped image files
         String longGreyMoped = "mopeds/moped-grau-lang.png";
         String yellowMoped = "mopeds/moped-yellow.png";
         String türkisMoped = "mopeds/moped-türkis.png";
@@ -94,9 +88,9 @@ public class world extends World {
        
         int left = 180;
         int right = 0;
-        
+        //array for holding cars
         PKW[] cars = new PKW[19];
-        cars[0] = new PKW(blackCar, 1, left);
+        cars[0] = new PKW(blackCar, 1, left); // filename, slotposition, oriantation
         cars[1] = new PKW(greenCar, 2, right);
         cars[2] = new PKW(blackCar, 3, left);
         cars[3] = new PKW(blackCar, 4, left);
@@ -114,14 +108,16 @@ public class world extends World {
         cars[15] = new PKW(blueCar, 16, left);
         cars[16] = new PKW(blueCar, 17, left);
          
-        for (Parkbucht i : getObjects(Parkbucht.class)) {
+        //cycles through all parkbuchten an cars and if the slot number
+        //matches its getting placed on the position of the parkbucht
+        for (Parkbucht parkbucht : getObjects(Parkbucht.class)) {
             for (PKW car : cars) {
                 if (car == null) {}
-                else if (car.getSlotPosition() == i.getSlotNumber() ) {
-                    car.setX(i.getX());
-                    car.setY(i.getY());
-                    //System.out.println(car.getX() + " " + car.getY());
-                    addObject(car, car.getX(), car.getY());
+                else if (car.getSlotPosition() == parkbucht.getSlotNumber() ) {
+                    car.setX(parkbucht.getCurrentX());
+                    car.setY(parkbucht.getCurrentY());
+                    //add car on top off parkbucht
+                    addObject(car, car.getCurrentX(), car.getCurrentY());
                 }
             }
         }

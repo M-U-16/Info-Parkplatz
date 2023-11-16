@@ -53,19 +53,24 @@ public class Fahrzeuge extends Actor {
     //get/set x and y
     public void setY(int y) { y_pos = y; }
     public void setX(int x) { x_pos = x; }
-    public int getX() { return x_pos; }
-    public int getY() { return y_pos; }
+    public int getCurrentX() { return x_pos; }
+    public int getCurrentY() { return y_pos; }
     
     //set width and height
     public void setWidth() { width = image.getWidth(); }
     public void setHeight() { height = image.getHeight(); }
     
     public void update() { setRotation(direction); }
+    //generate random number for car speed
     public int generateRandomSpeed() { return random.nextInt(2, 6); }
     
+    //better method for checking the collision with world borders
+    //not yet finished!!!
     public boolean checkEdge() {
         //check left edge
         if (x_pos + width / 2 <= 0) { return true; }
+        
+        //just return true
         return true;
     }
     
