@@ -3,13 +3,14 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public class world extends World {
     
     private Parkplatz parkplatz;
-    private int parkbuchtWidth = 63;
-    private int parkbuchtHeight = 28;
+    private int parkbuchtWidth = 90;
+    private int parkbuchtHeight = 40;
     private int AMOUNT_OF_PARKBUCHTEN = 28;
     private int parkplatzMiddle = 60;
     private int AMOUNT_OF_PARKBUCHTEN_PER_SIDE = 14;
     private int parkplatzWidth;
     private int parkplatzHeight;
+    private int MAX_CARS = 10;
     
     public world() {
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
@@ -91,7 +92,7 @@ public class world extends World {
         int left = 180;
         int right = 0;
         //array for holding cars
-        PKW[] cars = new PKW[25];
+        PKW[] cars = new PKW[20];
         cars[0] = new PKW(blueCar, 1, right); // filename, slotposition, oriantation
         cars[1] = new PKW(silverCar, 2, right);
         cars[2] = new PKW(blackCar, 3, left);
@@ -115,14 +116,17 @@ public class world extends World {
         //cycles through all parkbuchten an cars and if the slot number
         //matches its getting placed on the position of the parkbucht
         for (Parkbucht parkbucht : getObjects(Parkbucht.class)) {
-            for (PKW car : cars) {
-                if (car == null) {}
-                else if (car.getSlotPosition() == parkbucht.getSlotNumber() ) {
-                    car.setX(parkbucht.getCurrentX());
-                    car.setY(parkbucht.getCurrentY());
+            //for (PKW car : cars) {
+            for (int i = 0; i < cars.length; i++) {
+                int currentSlotNumber = parkbucht.getSlotNumber();
+                
+                if (cars[i] == null) {}
+                else if (cars[i].getSlotPosition() == currentSlotNumber && i <= MAX_CARS) {
+                    cars[i].setX(parkbucht.getCurrentX());
+                    cars[i].setY(parkbucht.getCurrentY());
                     //add car on top off parkbucht
-                    addObject(car, car.getCurrentX(), car.getCurrentY());
-                }
+                    addObject(cars[i], cars[i].getCurrentX(), cars[i].getCurrentY());
+                }   
             }
         }
     }

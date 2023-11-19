@@ -5,23 +5,19 @@ public class PKW extends Fahrzeuge {
     public PKW(String imgPath, int slotPosition, int rotation) {
         
         setSprite(imgPath);
-        image.scale(image.getWidth() - 20, image.getHeight() - 10);
         setWidth();
         setHeight();
         setSlotPosition(slotPosition);
         
         setImage(getSprite());
-        setRotation(rotation);
+        direction = rotation;
+        update();
     }
     public int getSlotPosition() { return slotPosition; }
     public void act() {
-        
+        //check if car is intersecting with parkplatz
+        isIntersecting = getOneIntersectingObject(Parkplatz.class) != null;
         movement();
-        if (isAtEdge()) {
-            if (direction == 180) { setDirection(0); }
-            else if (direction == 0) { setDirection(180); }
-            update();
-        }
-        
+        update();
     }
 }

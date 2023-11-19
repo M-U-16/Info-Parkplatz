@@ -5,8 +5,8 @@ public class Parkplatz extends Strukturen {
     public int PARKPLATZ_WIDTH;
     public int PARKPLATZ_HEIGHT;
     public GreenfootImage parkplatz;
+    public int SPEED_LIMIT = 3;
     
-    //constructor
     public Parkplatz(int x, int y, int width, int height) {
         super("parkbucht.png");
         PARKPLATZ_WIDTH = width;
@@ -16,6 +16,8 @@ public class Parkplatz extends Strukturen {
         setX(x);
         setY(y);
     }
+    //get for speed limit
+    public int getSpeedLimit() { return SPEED_LIMIT; }
     //method for drawing the image of the parkplatz
     public void drawParkplatzImage() {
         image.setColor(new Color(140, 140, 140));
@@ -26,8 +28,5 @@ public class Parkplatz extends Strukturen {
     public void addParkbucht() {
         this.getWorld().addObject(new Parkbucht(11, false), 100, 100);
     }
-    
-    //act method
-    public void act() {
-    }
+    public void act() {}
 }

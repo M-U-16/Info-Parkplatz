@@ -10,7 +10,7 @@ public class Parkbucht extends Strukturen {
         super("parkbucht.png");
         setSlotNumber(slot);
         setSlotText(slot);
-        setRotation(isFliped);
+        flipParkbucht(isFliped);
     }
     
     //get/set slot number
@@ -22,7 +22,7 @@ public class Parkbucht extends Strukturen {
     public String getSlotText() { return slotText; }
     
     //set rotation
-    public void setRotation(boolean isFliped) {
+    public void flipParkbucht(boolean isFliped) {
         if (isFliped) { setRotation(180); }
     }
     //act method
