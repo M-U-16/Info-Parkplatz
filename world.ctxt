@@ -2,8 +2,8 @@
 comment0.target=world
 comment1.params=
 comment1.target=world()
-comment2.params=slotNumber\ isFliped
-comment2.target=void\ addParkbucht(int,\ boolean)
+comment2.params=
+comment2.target=void\ addCarParkplatz()
 comment3.params=
 comment3.target=void\ populate()
 numComments=4

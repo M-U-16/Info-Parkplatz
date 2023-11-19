@@ -10,14 +10,22 @@ public class PKW extends Fahrzeuge {
         setSlotPosition(slotPosition);
         
         setImage(getSprite());
-        direction = rotation;
-        update();
+        setDirection(rotation);
+        setSpeed(generateRandomSpeed());
     }
     public int getSlotPosition() { return slotPosition; }
+    public void checkCarCollision() {
+        this.removeTouching(PKW.class);
+    }
+    public void destroyCar() {
+        this.getWorld().removeObject(this);
+    }
     public void act() {
+        //check if car is colliding with other cars
+        checkCarCollision();
         //check if car is intersecting with parkplatz
         isIntersecting = getOneIntersectingObject(Parkplatz.class) != null;
         movement();
-        update();
+        //update();
     }
 }

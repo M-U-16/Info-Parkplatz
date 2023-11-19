@@ -7,7 +7,6 @@ public class Fahrzeuge extends Actor {
     public String color;
     public String startDirection;
     public int slotPosition;
-    public Random random = new Random();
     
     public GreenfootImage image;
     
@@ -20,7 +19,6 @@ public class Fahrzeuge extends Actor {
     public boolean isIntersecting;
     
     public Fahrzeuge() {
-        setSpeed(generateRandomSpeed());
     }
     //get/set image
     public void setSprite(String imgPath) { image = new GreenfootImage(imgPath); }
@@ -38,7 +36,10 @@ public class Fahrzeuge extends Actor {
     //public void setStartDirection(String direction) { startDirection = direction; }
     
     //set/get direction
-    public void setDirection(int rotation) { direction = rotation; }
+    public void setDirection(int rotation) {
+        direction = rotation;
+        setRotation(direction);
+    }
     public int getDirection() { return direction; }
     
     //set/get speed
@@ -60,46 +61,37 @@ public class Fahrzeuge extends Actor {
     public void setHeight() { height = image.getHeight(); }
     
     public void update() {
-        setRotation(direction);
+        //setRotation(direction);
     }
     //generate random number for car speed
-    public int generateRandomSpeed() { 
-        return random.nextInt(2, 6);
+    public int generateRandomSpeed() {
+        int randomSpeedInt = (int)(Math.random() * 4 + 2);
+        return randomSpeedInt;
     }
     
     //better method for checking the collision with world borders
     public boolean checkEdge() {
         
         //check left edge
-        if (getX() - width / 2 <= 0 && direction == 180) {
-            System.out.println("collision left: " + direction);
-            return true;      
-        }
+        if (getX() - width / 2 <= 0 && direction == 180) { return true; }
         //check right edge
         if (getX() + width / 2 >= this.getWorld().getWidth() && direction == 0) { return true; }
-        //check top edge
-        if (getY() - width / 2 <= 0) {
-            return true; 
-        }
-        //check bottom edge
-        if (getY() + width / 2 >= this.getWorld().getHeight()) { return true; }
         
+        //no collision with any border
         return false;
     }
-    
     public void uTurn() {
         if (direction == 90) { setDirection(360); }
         else if (direction == 360) { setDirection(90); }
         else if (direction == 0) { setDirection(180); }
         else if (direction == 180) { setDirection(0); }
     }
-    
     public void movement() {
-        if (checkEdge()) { uTurn(); }
-        
         int distance = speed;
         if (isIntersecting) { distance = 2; }
         move(distance);
+        
+        if (checkEdge()) { uTurn(); }
     }
     public void act() {
         
