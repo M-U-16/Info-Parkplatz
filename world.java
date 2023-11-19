@@ -78,8 +78,10 @@ public class world extends World {
         String blackCar = "cars/black-car.png";
         String greenCar = "cars/green-car.png";
         String blueCar = "cars/blue-car.png";
-        String whiteCar = "cars/white-car.png";
+        String whiteCar = "cars/car-white.png";
         String redCar = "cars/red-car.png";
+        String silverCar = "cars/car-silber.png";
+        String greyCar="cars/grey-car.png";
         //moped image files
         String longGreyMoped = "mopeds/moped-grau-lang.png";
         String yellowMoped = "mopeds/moped-yellow.png";
@@ -89,25 +91,27 @@ public class world extends World {
         int left = 180;
         int right = 0;
         //array for holding cars
-        PKW[] cars = new PKW[19];
-        cars[0] = new PKW(blackCar, 1, left); // filename, slotposition, oriantation
-        cars[1] = new PKW(greenCar, 2, right);
+        PKW[] cars = new PKW[25];
+        cars[0] = new PKW(blueCar, 1, right); // filename, slotposition, oriantation
+        cars[1] = new PKW(silverCar, 2, right);
         cars[2] = new PKW(blackCar, 3, left);
-        cars[3] = new PKW(blackCar, 4, left);
+        cars[3] = new PKW(redCar, 4, left);
         cars[4] = new PKW(blackCar, 5, left);
-        cars[5] = new PKW(blackCar, 6, left);
-        cars[6] = new PKW(redCar, 7, left);
-        cars[7] = new PKW(whiteCar, 8, left);
-        cars[8] = new PKW(blackCar, 9, left);
-        cars[9] = new PKW(blueCar, 10, left);
-        cars[10] = new PKW(blueCar, 11, left);
-        cars[11] = new PKW(blueCar, 12, left);
-        cars[12] = new PKW(blueCar, 13, left);
-        cars[13] = new PKW(blueCar, 14, left);
+        cars[5] = new PKW(greyCar, 6, left);
+        cars[6] = new PKW(whiteCar, 7, left);
+        cars[7] = new PKW(silverCar, 8, left);
+        cars[8] = new PKW(blueCar, 9, left);
+        cars[9] = new PKW(greyCar, 10, right);
+        cars[10] = new PKW(whiteCar, 11, right);
+        cars[11] = new PKW(redCar, 12, right);
+        cars[12] = new PKW(redCar, 13, right);
+        cars[13] = new PKW(greyCar, 14, right);
         cars[14] = new PKW(blueCar, 15, left);
-        cars[15] = new PKW(blueCar, 16, left);
+        cars[15] = new PKW(greyCar, 16, left);
         cars[16] = new PKW(blueCar, 17, left);
-         
+        cars[17] = new PKW(blueCar, 19 ,right);
+        cars[18] = new PKW(greyCar, 20, right);
+        cars[19] = new PKW(silverCar, 21,right);
         //cycles through all parkbuchten an cars and if the slot number
         //matches its getting placed on the position of the parkbucht
         for (Parkbucht parkbucht : getObjects(Parkbucht.class)) {

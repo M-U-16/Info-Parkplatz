@@ -7,20 +7,19 @@ public class Fahrzeuge extends Actor {
     public String color;
     public String startDirection;
     public int slotPosition;
-    public Random random = new Random();
+    public Random random;
     
     public GreenfootImage image;
     
     public int direction;
     public int speed;
-    
     public int x_pos;
     public int y_pos;
-    
     public int width;
     public int height;
     
     public Fahrzeuge() {
+        random = new Random();
         setSpeed(generateRandomSpeed());
     }
     //get/set image
@@ -62,7 +61,10 @@ public class Fahrzeuge extends Actor {
     
     public void update() { setRotation(direction); }
     //generate random number for car speed
-    public int generateRandomSpeed() { return random.nextInt(2, 6); }
+    public int generateRandomSpeed() { 
+        //random.nextInt(2, 6); 
+        return 5;
+    }
     
     //better method for checking the collision with world borders
     //not yet finished!!!
